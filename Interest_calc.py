@@ -40,6 +40,5 @@ class Interest:
                 rates(d, e, f)
                 display()
             if asking=="X":
-                exit()
-                searching()
+                exit
         display()
