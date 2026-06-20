@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Calculator Terminal</title>
+    
+    <!-- Load PyScript -->
+    <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css" />
+    <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+
+    <!-- Configure PyScript to fetch your local files -->
+    <script type="py" config>
+        {
+            "fetch": [
+                {
+                    "files": [
+                        "./Calculator_main.py",
+                        "./Grocery_calc.py",
+                        "./Interest_calc_py.py",
+                        "./Physics_calc.py",
+                        "./Simple_calculator.py"
+                    ]
+                }
+            ]
+        }
+    </script>
+</head>
+<body>
+    <h1>Calculator Terminal</h1>
+    
+    <!-- 
+      1. src="./Calculator_main.py": Runs your main file.
+      2. terminal: Creates the black terminal look.
+      3. worker: Allows input() without freezing the page.
+    -->
+    <script type="py" src="./Calculator_main.py" terminal worker></script>
+</body>
+</html>   
