@@ -5,4 +5,3 @@ class Multiplication:
         for i in range(1,x+1):
             print("|",i," x ",y," = ",i*y,"|")
         print(f"The multiplication table of {y} is printed")
-        searching()
