@@ -109,7 +109,7 @@ def AI():
             p=Physics()
             p.calc_Physics()
             searching()
-        elif(load in [['exit'],['quit'],['get','out'],['close']]:
+        elif(load in [['exit'],['quit'],['get','out'],['close']]):
             exit
         else:
             print("Error!")
