@@ -85,12 +85,12 @@ def AI():
                     continue
         filtering()
         if(load in [['interest','calculator'],['interest','calc'],['interest','cal'],['interest','library'],['interest','lib'],['interest']]):
-            from Interest_calc_calc.py import Interest
+            from Interest_calc_calc import Interest
             i=Interest()
             i.calc_Interest()
             searching()
         elif(load in [['calculator','calc'],['calculator','cal'],['multiply'],['add'],['subtract'],['divide'],['modulus'],['remainder'],['addition'],['subtraction'],['multiplication'],['division'],['calculator']]):
-            from Simple_Calculator.py import Calculator
+            from Simple_Calculator import Calculator
             c=Calculator()
             c.calc_Simple()
             searching()
@@ -100,7 +100,7 @@ def AI():
             g.calc_grocery()
             searching()
         elif(load in [['multiplication','table'],['multiplication','tfunc'],['multiplication'],['series'],['multiplication','series']]):
-            from Multiplication_table.py import Multiplication
+            from Multiplication_table import Multiplication
             m=Multiplication()
             m.calc_Multiplication_table()
             searching()
