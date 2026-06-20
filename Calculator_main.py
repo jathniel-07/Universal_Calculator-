@@ -94,6 +94,9 @@ def AI():
                 g.calc_grocery()
             elif(load in [['multiplication','table'],['multiplication','tfunc'],['multiplication'],['series'],['multiplication','series']]):
             elif(load in [['physics','calculator'],['physics'],['displacement'],['speed'],['average','speed'],['velocity'],['angular','velocity'],['angle'],['angle','projection'],['projection'],['time','interval'],['time'],['acceleration']]):
+                from Physics_calc import Physics
+                p=Physics()
+                p.calc_Physics()
             else:
             print("Error!")
             for i in range(0,101):
