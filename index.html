@@ -52,21 +52,18 @@
             position: relative;
         }
 
+        /* TERMINAL CONTAINER - VISIBLE IMMEDIATELY */
         .terminal-wrapper {
             width: 95vw;
             height: 95vh;
             background: var(--terminal-bg);
             border: 1px solid var(--border-color);
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            display: none; /* Hidden by default */
+            display: flex; /* Changed from none to flex */
             flex-direction: column;
             border-radius: 8px;
             overflow: hidden;
             transition: all 0.3s ease;
-        }
-
-        .terminal-wrapper.visible {
-            display: flex;
         }
 
         .terminal-header {
@@ -91,38 +88,9 @@
             gap: 15px;
         }
 
-        .header-left span {
-            cursor: pointer;
-            padding-bottom: 8px;
-        }
-        
         .header-left span.active {
             color: #ffffff;
             border-bottom: 2px solid var(--accent-color);
-        }
-
-        #start-btn {
-            background-color: var(--accent-color);
-            color: white;
-            border: none;
-            padding: 6px 12px;
-            border-radius: 4px;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.75rem;
-            font-weight: 600;
-            cursor: pointer;
-            text-transform: uppercase;
-            transition: background 0.2s;
-        }
-
-        #start-btn:hover {
-            background-color: #005f9e;
-        }
-
-        #start-btn:disabled {
-            background-color: #555;
-            cursor: not-allowed;
-            opacity: 0.5;
         }
 
         py-terminal {
@@ -138,20 +106,6 @@
             box-sizing: border-box;
         }
 
-        #loader {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: #888;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 1rem;
-            pointer-events: none;
-            z-index: 10;
-            text-align: center;
-            transition: opacity 0.5s ease;
-        }
-
         /* MOBILE OPTIMIZATIONS */
         @media screen and (max-width: 768px) {
             .terminal-header {
@@ -159,19 +113,15 @@
                 font-size: 0.7rem;
             }
 
-            #start-btn {
-                padding: 5px 10px;
-                font-size: 0.7rem;
-            }
-
+            /* PORTRAIT MODE: Half Height & Centered */
             @media screen and (orientation: portrait) {
-                .terminal-wrapper.visible {
+                .terminal-wrapper {
                     width: 90vw;
-                    height: 50vh;
+                    height: 50vh; /* Half height */
                     position: absolute;
                     top: 50%;
                     left: 50%;
-                    transform: translate(-50%, -50%);
+                    transform: translate(-50%, -50%); /* Perfect Center */
                     border-radius: 12px;
                     box-shadow: 0 15px 40px rgba(0,0,0,0.6);
                     border: 1px solid #444;
@@ -183,8 +133,9 @@
                 }
             }
 
+            /* LANDSCAPE MODE */
             @media screen and (orientation: landscape) {
-                .terminal-wrapper.visible {
+                .terminal-wrapper {
                     width: 95vw;
                     height: 85vh;
                     position: absolute;
@@ -202,70 +153,18 @@
 </head>
 <body>
 
-    <!-- Loader -->
-    <div id="loader">
-        <div>AI LOADING...</div>
-        <div style="font-size: 0.8em; margin-top:5px; color:#555;">Initializing Engine</div>
-    </div>
-
-    <!-- Terminal Container -->
+    <!-- Terminal Container (Visible Immediately) -->
     <div class="terminal-wrapper" id="terminal-container">
         <div class="terminal-header">
             <div class="header-left">
                 <span class="active">Terminal</span>
                 <span style="color: #666;">JATH.AI</span>
             </div>
-            <button id="start-btn" disabled>Wait...</button>
+            <!-- Start Button Removed for immediate execution -->
         </div>
         
         <script type="py" src="./Calculator_main.py" terminal worker></script>
     </div>
 
-    <script>
-        const loader = document.getElementById('loader');
-        const startBtn = document.getElementById('start-btn');
-        const terminal = document.getElementById('terminal-container');
-        let isReady = false;
-
-        // Method 1: Try py-ready event
-        document.addEventListener("py-ready", () => {
-            console.log("py-ready event fired");
-            enableInterface();
-        });
-
-        // Method 2: Intercept Console Log (More Reliable for Workers)
-        // PyScript logs "PyScript page fully initialized" when done
-        const originalConsoleLog = console.log;
-        console.log = function(message) {
-            originalConsoleLog.apply(console, arguments);
-            if (message && message.toString().includes("PyScript page fully initialized")) {
-                console.log("PyScript initialization detected via console log");
-                enableInterface();
-            }
-        };
-
-        function enableInterface() {
-            if (isReady) return; // Prevent double firing
-            isReady = true;
-
-            // Fade out loader
-            loader.style.opacity = '0';
-            
-            // Enable start button
-            startBtn.disabled = false;
-            startBtn.textContent = "Start Execution";
-            
-            // Remove loader from DOM after fade
-            setTimeout(() => {
-                loader.style.display = 'none';
-            }, 500);
-        }
-
-        // Start Button Click Handler
-        startBtn.addEventListener('click', function() {
-            terminal.classList.add('visible');
-            this.style.display = 'none'; // Hide button after start
-        });
-    </script>
 </body>
 </html>   
