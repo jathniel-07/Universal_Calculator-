@@ -1,24 +1,6 @@
 import time
 import math 
 def load_screen():
-    f_screen=""" 
-                        ==========================================================================================================================================
-                        ::        10100101010001         e000e        100110001001001       10         10                      e000e          10101001100100    ::
-                        ::              10              01   10             10              01         00                     10   00               10          ::
-                        ::              00             10     01            01              01         01                    01     00              00          ::
-                        ::              01            10000000000           01              1011001010010                   01001010101             01          ::
-                        ::              00           01         01          10              01         10                  10         01            01          ::
-                        ::        e0e   10          10           10         10              10         01                 01           10           10          ::
-                        ::        00010001        1000           0001       01              10         01               1001           1001   10010101000100    ::             
-                         ==========================================================================================================================================                       """
-    for i in f_screen:
-        print(i,end="",flush=True)
-        time.sleep(0.001)
-    print("\n")
-    for i in range(0,101):
-        print(f"\rLOADING SYSTEM:{i}%",end="",flush=True)
-        time.sleep(0.03)
-    print("\n")
     word="WELCOME TO AI POWERED CALCULATOR\n"
     for i in word:
         print(i,end=" ",flush=True)
@@ -30,7 +12,9 @@ def load_screen():
         time.sleep(0.1)
     print("\n")
     functions_ex="""
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+    
 (THIS PROGRAM IS CASE INSENSITIVE)
 (CONVERSATION IS PERMITTED RATHER THAN ONLY KEYWORDS)
 (EXPLAIN YOU NEED AS SIMPLE AS POSSIBLE)
@@ -43,7 +27,8 @@ LIST OF LIBRARIES:
 4.MULTIPLICATION TABLE => Multiplication Table for printing the multiplication table of any number
 5.PHYSICS CALCULATOR   => Physics calculator for all physics values to be found (It's a large library)
 
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------"""
+
+"""
     for i in functions_ex:
         print(i,end="",flush=True)
         time.sleep(0.008)
