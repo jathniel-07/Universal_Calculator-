@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI  POWERED UNIVERSAL CALCULATOR</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>AI POWERED UNIVERSAL CALCULATOR</title>
     
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,11 +13,10 @@
     <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css" />
     <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
 
-    <!-- Mini-COI Fix (Required for GitHub Pages) -->
+    <!-- Mini-COI Fix -->
     <script src="mini-coi.js" scope="./"></script>
 
-    <!-- Config: Fetch your 5 Python files -->
-   <py-config>
+    <py-config>
         [[fetch]]
         files = [
             "./Calculator_main.py",
@@ -30,24 +29,6 @@
     </py-config>
 
     <style>
-        @media (max-width: 768px) and (orientation: portrait) {
-    body::before {
-        content: "Please rotate your device to landscape mode.";
-        position: fixed;
-        top: 0; left: 0; right: 0; bottom: 0;
-        background: #000;
-        color: #fff;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 9999;
-        font-family: 'Inter', sans-serif;
-        font-size: 18px;
-        text-align: center;
-        padding: 20px;
-    }
-    .terminal-wrapper { display: none; }
-}
         :root {
             --bg-color: #1e1e1e;
             --terminal-bg: #1e1e1e;
@@ -56,36 +37,30 @@
             --border-color: #333333;
         }
 
-        /* CENTERING MAGIC: Flexbox */
         body {
             margin: 0;
             padding: 0;
             font-family: 'Inter', sans-serif;
-            background-color: #0d0d0d; /* Darker background for contrast */
+            background-color: #0d0d0d;
             color: var(--text-color);
             height: 100vh;
-            display: flex;             /* Enable Flexbox */
-            justify-content: center;   /* Center Horizontally */
-            align-items: center;       /* Center Vertically */
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             overflow: hidden;
         }
 
-        /* VS Code Full Screen Terminal Dimensions */
+        /* FULL SCREEN TERMINAL */
         .terminal-wrapper {
-            /* 
-               To mimic VS Code "Full Screen" editor feel:
-               We give it a large fixed size or 90% of screen.
-               This makes it look like a focused window.
-            */
-            width: 95vw;  /* 90% of viewport width */
-            height: 95vh; /* 85% of viewport height */
-            
+            width: 100vw;  /* Changed from 95vw to 100vw */
+            height: 100vh; /* Changed from 95vh to 100vh */
             background: var(--terminal-bg);
-            border: 1px solid var(--border-color);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5); /* Deep shadow for floating effect */
+            border: none;  /* Removed border for full immersion */
+            box-shadow: none;
             display: flex;
             flex-direction: column;
-            border-radius: 8px; /* Slight rounding like modern editors */
+            border-radius: 0; /* Removed rounding */
             overflow: hidden;
         }
 
@@ -95,12 +70,13 @@
             display: flex;
             align-items: center;
             padding: 0 1rem;
-            font-size: 0.5rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             color: #969696;
             border-bottom: 1px solid #333;
             user-select: none;
+            flex-shrink: 0;
         }
 
         .terminal-header span {
@@ -114,19 +90,22 @@
             border-bottom: 2px solid var(--accent-color);
         }
 
-        /* PyScript Terminal Styling */
+        /* MAXIMIZED TEXT AREA */
         py-terminal {
             flex: 1;
-            padding: 1rem;
+            /* Reduced padding to maximize space */
+            padding: 0.5rem; 
             font-family: 'JetBrains Mono', monospace;
-            font-size: 11px;
-            line-height: 1.5;
+            /* Responsive Font Size: Scales with viewport */
+            font-size: clamp(12px, 2.5vmin, 18px); 
+            line-height: 1.4;
             overflow-y: auto;
             color: #cccccc;
             background: transparent;
+            width: 100%;
+            box-sizing: border-box;
         }
 
-        /* Loader */
         #loader {
             position: absolute;
             top: 50%;
@@ -134,23 +113,42 @@
             transform: translate(-50%, -50%);
             color: #888;
             font-family: 'JetBrains Mono', monospace;
-            font-size: 0.9rem;
+            font-size: 1rem;
             pointer-events: none;
+            z-index: 10;
+        }
+
+        /* ANDROID PORTRAIT OPTIMIZATION */
+        @media (max-width: 768px) and (orientation: portrait) {
+            .terminal-wrapper {
+                width: 100vw;
+                height: 100vh;
+            }
+            
+            py-terminal {
+                /* Smaller font for narrow screens to fit more width */
+                font-size: clamp(10px, 3.5vmin, 14px);
+                padding: 0.25rem; /* Minimal padding */
+            }
+            
+            .terminal-header {
+                height: 30px;
+                font-size: 0.7rem;
+                padding: 0 0.5rem;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- The Centered Terminal Container -->
     <div class="terminal-wrapper">
         <div class="terminal-header">
             <span class="active">Terminal</span>
-            <span style="margin-left: margin-right; color: #666;">JATH.AI</span>
+            <span style="margin-left: auto; color: #666;">JATH.AI</span>
         </div>
         
         <div id="loader">AI LOADING......</div>
         
-        <!-- Terminal Script -->
         <script type="py" src="./Calculator_main.py" terminal worker></script>
     </div>
 
